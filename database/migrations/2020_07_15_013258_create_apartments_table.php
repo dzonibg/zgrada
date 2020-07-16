@@ -17,8 +17,8 @@ class CreateApartmentsTable extends Migration
             $table->id();
             $table->integer("number");
             $table->string("name");
-            $table->integer("total_paid");
-            $table->integer("months_paid");
+            $table->integer("total_paid")->default("0");
+            $table->integer("months_paid")->default("0");
             $table->timestamps();
         });
     }

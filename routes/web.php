@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::resource("apartments", "ApartmentController");
+
 Route::get('/', function () {
     return view('home');
 });

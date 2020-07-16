@@ -14,7 +14,8 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        //
+        $apartments = Apartment::all()->sortBy("number");
+        return view("apartments.index", compact("apartments"));
     }
 
     /**
@@ -24,7 +25,7 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        //
+        return view("apartments.create");
     }
 
     /**
@@ -35,7 +36,15 @@ class ApartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $apartment = new Apartment();
+        $apartment->name = $request->post("name");
+        $apartment->number = $request->post("apartmentNumber");
+        $apartment->save();
+        $message = "Dodat novi stan broj " . $apartment->number . " vlasnika " . $apartment->name;
+
+        $apartments = Apartment::all()->sortBy("number");
+
+        return view("apartments.index", compact("message", "apartments"));
     }
 
     /**
@@ -46,7 +55,8 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        //
+        Apartment::findOrFail($apartment->id);
+        return view("apartments.show", compact("apartment"));
     }
 
     /**
@@ -57,7 +67,8 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
-        //
+        Apartment::findOrFail($apartment->id);
+        return view("apartments.edit", compact("apartment"));
     }
 
     /**
@@ -69,7 +80,10 @@ class ApartmentController extends Controller
      */
     public function update(Request $request, Apartment $apartment)
     {
-        //
+
+        $apartment->update($this->validated());
+        return redirect("/apartments");
+
     }
 
     /**
@@ -82,4 +96,12 @@ class ApartmentController extends Controller
     {
         //
     }
+
+    public function validated() {
+        return request()->validate([
+            'name' => 'required',
+            'number' => 'required'
+        ]);
+    }
+
 }
