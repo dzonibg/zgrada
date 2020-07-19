@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Payment;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
@@ -14,7 +15,7 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        //
+        return view('payments.index');
     }
 
     /**
@@ -24,7 +25,7 @@ class PaymentController extends Controller
      */
     public function create()
     {
-        //
+        return view('payments.create');
     }
 
     /**
@@ -35,7 +36,12 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $payment = new Payment();
+        $payment->apartment_number = $request->post('number');
+        $payment->paid = $request->post('paid');
+        $payment->payment_date = Carbon::now();
+        $payment->save();
+        return redirect('/payments/create');
     }
 
     /**
@@ -81,5 +87,11 @@ class PaymentController extends Controller
     public function destroy(Payment $payment)
     {
         //
+    }
+
+    public function validated() {
+        return request()->validate([
+            'number' => 'required'
+        ]);
     }
 }

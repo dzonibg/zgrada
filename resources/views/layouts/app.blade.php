@@ -45,7 +45,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/payment">Placanja</a>
+                            <a class="nav-link" href="/payments">Placanja</a>
                         </li>
 
                         <!-- Authentication Links -->

@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::resource("apartments", "ApartmentController");
+Route::resource('payments', 'PaymentController');
 
 Route::get('/', function () {
     return view('home');

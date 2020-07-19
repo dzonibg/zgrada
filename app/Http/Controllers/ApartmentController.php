@@ -55,7 +55,8 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        Apartment::findOrFail($apartment->id);
+        $apartment = Apartment::findOrFail($apartment->id);
+        dd($apartment->payment());
         return view("apartments.show", compact("apartment"));
     }
 
