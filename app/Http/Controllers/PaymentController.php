@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Apartment;
 use App\Payment;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -39,9 +40,10 @@ class PaymentController extends Controller
         $payment = new Payment();
         $payment->apartment_number = $request->post('number');
         $payment->paid = $request->post('paid');
-        $payment->payment_date = Carbon::now();
+        $payment->payment_date = $request->post('date');
         $payment->save();
         return redirect('/payments/create');
+
     }
 
     /**

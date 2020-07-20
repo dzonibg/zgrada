@@ -15,11 +15,13 @@ class CreateApartmentsTable extends Migration
     {
         Schema::create('apartments', function (Blueprint $table) {
             $table->id();
-            $table->integer("number");
+            $table->unsignedInteger("number");
             $table->string("name");
             $table->integer("total_paid")->default("0");
             $table->integer("months_paid")->default("0");
             $table->timestamps();
+
+//            $table->foreign("number")->references("apartment_number")->on("payments");
         });
     }
 

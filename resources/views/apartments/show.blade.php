@@ -4,13 +4,29 @@
 <div class="container">
     <h2>Stan {{$apartment->number}} - {{$apartment->name}}</h2>
     <hr>
-    <p>Ukupno placeno: {{$apartment->total_paid}} RSD</p>
-    <p>Meseci placeno: {{$apartment->months_paid}}</p>
-    <p>Prosecno placeno po mesecu: {{$apartment->total_paid/$apartment->months_paid}} RSD</p>
-    <p>NON-DUMMY-DATA:</p>
+    <p>Ukupno placeno: {{$apartment->payment->sum('paid')}} RSD</p>
+    <p>Meseci placeno: {{$apartment->payment->sum('paid')/2600 ?? ''}}</p>
+    <p>Prosecno placeno po mesecu: @if($apartment->months_paid>0) {{$apartment->total_paid/$apartment->months_paid}} @endif RSD</p>
     <hr>
-    <p>Placeno ukupno: {{var_dump($apartment->payment->id)}}</p>
-    <p><a href="{{$apartment->id}}/edit">Izmeni</a></p>
+    <p>Placeno ukupno:
+    <ol>
+    @foreach($payments as $payment)
+        <li>{{$payment->paid}} - {{$payment->payment_date}}</li>
+        @endforeach
+</ol>
+    </p>
+    </p>
+    <p><a href="{{$apartment->id}}/edit">Izmeni podatke</a></p>
+
+        <p>
+
+            <form action="/payments/create" method="GET">
+            <input type="hidden" name="number" id="number" value="{{$apartment->number}}">
+            <button type="submit" class="btn btn-primary">Dodaj uplatu</button>
+        </form>
+
+        </p>
+
 </div>
 
 @endsection

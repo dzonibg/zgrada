@@ -32,7 +32,6 @@ use Illuminate\Database\Eloquent\Model;
 class Payment extends Model
 {
     public function apartment() {
-//        return $this->hasOne("App\Apartment", "number", "apartment_number");
-        return $this->belongsTo('App\Apartment', 'apartment_number', 'apartment_number'); //TODO NEED TO FIX!!!
+        return $this->belongsTo('App\Apartment', 'number'); //TODO NEED TO FIX!!!
     }
 }

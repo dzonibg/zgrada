@@ -31,10 +31,9 @@ use Illuminate\Database\Eloquent\Model;
 class Apartment extends Model
 {
 
-    protected $fillable = ['name', 'number'];
+    protected $fillable = ['name', 'number', 'total_paid', 'months_paid'];
 
     public function payment() {
-//        return $this->hasMany("App\Payment", "apartment_number", "number");
-        return $this->hasMany('App\Payment', 'number'); //TODO NEED TO FIX THE RELATIONSHIP
+        return $this->hasMany('App\Payment', 'apartment_number', "number"); //TODO NEED TO FIX THE RELATIONSHIP
     }
 }
