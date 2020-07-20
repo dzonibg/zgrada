@@ -16,9 +16,9 @@ class CreatePeriodsTable extends Migration
         Schema::create('periods', function (Blueprint $table) {
             $table->id();
             $table->string("month");
-            $table->integer("month_number");
-            $table->date("start_date");
-            $table->date("end_date");
+            $table->integer("month_number")->nullable();
+            $table->date("start_date")->nullable();
+            $table->date("end_date")->nullable();
             $table->timestamps();
         });
     }

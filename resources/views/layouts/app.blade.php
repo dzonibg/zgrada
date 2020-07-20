@@ -48,6 +48,10 @@
                             <a class="nav-link" href="/payments">Placanja</a>
                         </li>
 
+                        <li class="nav-item">
+                            <a class="nav-link" href="/periods">Naplate</a>
+                        </li>
+
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">

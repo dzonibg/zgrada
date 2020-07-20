@@ -18,8 +18,9 @@ class CreatePaymentsTable extends Migration
             $table->unsignedInteger("apartment_number");
             $table->date("payment_date")->nullable();
             $table->integer("payment_month")->nullable();
+            $table->string('payment_month_name')->nullable();
             $table->integer("paid");
-            $table->integer("payment_method")->nullable();
+            $table->string("payment_method")->nullable();
             $table->timestamps();
 
 //            $table->foreign('apartment_number')->references("number")->on("apartments");

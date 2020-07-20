@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Apartment;
 use App\Payment;
+use App\Period;
+use App\Periods;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -37,10 +39,28 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
+        $periodNumber = 0;
+        $allPayments = Payment::where('apartment_number', '=', $request->post('number'))
+            ->select('paid')->sum('paid');
+        $periodNumber = $allPayments/2600+1;
+        $periodName = Period::where("month_number", '=', $periodNumber)->first();
+        if (isset($periodName->month)) {
+            $periodName = $periodName->month;
+        } else $periodName = 'Nepoznat/Unapred';
+
         $payment = new Payment();
         $payment->apartment_number = $request->post('number');
         $payment->paid = $request->post('paid');
+
+        if(($payment->paid) > 2600) {
+            $mtsPaid = $payment->paid/2600 -1;
+            $periodName = $periodName . ' + ' . $mtsPaid;
+        }
+
         $payment->payment_date = $request->post('date');
+        $payment->payment_method = $request->post('method');
+        $payment->payment_month = $periodNumber;
+        $payment->payment_month_name = $periodName;
         $payment->save();
         return redirect('/payments/create');
 

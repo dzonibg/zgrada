@@ -14,7 +14,8 @@ class PeriodsController extends Controller
      */
     public function index()
     {
-        //
+        $periods = Periods::all();
+        return view('periods.index', compact('periods'));
     }
 
     /**
@@ -24,7 +25,8 @@ class PeriodsController extends Controller
      */
     public function create()
     {
-        //
+        $lastPeriod = Periods::get()->last();
+        return view('periods.create', compact('lastPeriod'));
     }
 
     /**
@@ -35,7 +37,11 @@ class PeriodsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $period = new Periods();
+        $period->month = $request->post('month');
+        $period->month_number = $request->post('month_number');
+        $period->save();
+        return redirect('/periods');
     }
 
     /**
