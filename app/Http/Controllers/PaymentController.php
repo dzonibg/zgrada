@@ -40,8 +40,7 @@ class PaymentController extends Controller
     public function store(Request $request)
     {
         $periodNumber = 0;
-        $allPayments = Payment::where('apartment_number', '=', $request->post('number'))
-            ->select('paid')->sum('paid');
+        $allPayments = Payment::where('apartment_number', '=', $request->post('number'))->sum('paid');
         $periodNumber = $allPayments/2600+1;
         $periodName = Period::where("month_number", '=', $periodNumber)->first();
         if (isset($periodName->month)) {

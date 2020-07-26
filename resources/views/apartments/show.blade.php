@@ -4,10 +4,12 @@
 <div class="container">
     <h2>Stan {{$apartment->number}} - {{$apartment->name}}</h2>
     <hr>
+    <span>Prvi nivo</span>
     <p>Ukupno placeno: {{$apartment->payment->sum('paid')}} RSD</p>
     <p>Meseci placeno: {{$apartment->payment->sum('paid')/2600 ?? ''}}</p>
     <p>Prosecno placeno po mesecu: @if($apartment->months_paid>0) {{$apartment->total_paid/$apartment->months_paid}} @endif RSD</p>
     <hr>
+    <span>Drugi nivo</span>
     <p>Uplate:
     <table class="table table-striped">
         <thead>

@@ -31,7 +31,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Payment extends Model
 {
-    public function apartment() {
-        return $this->belongsTo('App\Apartment', 'number'); //TODO NEED TO FIX!!!
-    }
+//    public function apartment() {
+//        return $this->belongsTo('App\Apartment', 'number'); //TODO NEED TO FIX!!!
+//    }
 }
